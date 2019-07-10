@@ -13,7 +13,7 @@ Font Awesome (free) icons snippet completions and icons panel displaying for dis
  - Internet connection 
  - Visual Studio Code ^1.31
 
-## Use instructions
+## Use 
 
  - Press `Ctrl + Shift + P` to call the command pallete 
  - Type *"Nearest icons"*, enough to get *"Nearest Icons - from Font-Awesome"* name in list
@@ -26,4 +26,4 @@ Font Awesome (free) icons snippet completions and icons panel displaying for dis
  - Inline snippets completions
  - Older versions limitations
 
-### Get it on [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons)
+### See it on [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons)
