@@ -1,7 +1,7 @@
 {
 	"name": "nearest-icons",
 	"displayName": "Nearest Icons from Font-Awesome",
-	"description": "Font Awesome Icons quick-pick and icons panel displaying",
+	"description": "Font Awesome (free) icons snippet completions and icons panel displaying for discovering search.",
 	"icon": "media/ni-logo-gray.png",
 	"galleryBanner": {
 		"color": "#C80000",

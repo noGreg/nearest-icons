@@ -11,7 +11,7 @@ Font Awesome (free) icons snippet completions and icons panel displaying for dis
 ## Requirements
 
  - Internet connection 
- - Visual Studio Code ^1.31
+ - Visual Studio Code ^1.34
 
 ## Use 
 
@@ -24,6 +24,10 @@ Font Awesome (free) icons snippet completions and icons panel displaying for dis
 
  - Offline use
  - Inline snippets completions
- - Older versions limitations
 
 ### See it on [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons)
+
+## Backlog
+
+ - 1.0.1 Richer README.md
+ - 1.0.0 First release

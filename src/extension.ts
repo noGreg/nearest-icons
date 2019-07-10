@@ -26,10 +26,6 @@ export function activate(context: vscode.ExtensionContext) {
 			currentPanel.webview.onDidReceiveMessage(
 				async message => {
 					if (message.openIconPage) {
-						// vscode.env.openExternal(vscode.Uri.parse(message.openIconPage)).then(async (res) => {
-						// 	if (!res) {
-						// 	}
-						// });
 						await open(message.openIconPage);	
 					}
 				}
