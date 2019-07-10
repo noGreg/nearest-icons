@@ -1,16 +1,16 @@
-# Nearest Icons - from Font-Awesome
+# Nearest Icons - from Font Awesome
 
-Font Awesome Icons quick-pick and icons panel displaying.
+Font Awesome (free) icons snippet completions and icons panel displaying for discovering search.
 
 ## Features
 
- - Icons tab panel, where you have the both free font-awesome `brand` and `solid` icons bunch. Where you can:
+ - Icons tab panel, where you have the both free font-awesome **brand** and **solid** icons bunch. Where you can:
    - Copy name, unicode and the tipic `i` snippet tag.
    - Directly open the Font-Awesome icon webpage.
 
 ## Requirements
 
- - Internet connection
+ - Internet connection 
  - Visual Studio Code ^1.31
 
 ## Use instructions
@@ -20,8 +20,10 @@ Font Awesome Icons quick-pick and icons panel displaying.
 
 ![alt text](./media/demo.gif "Demo gif")
 
-## Comming...
+## Working on...
 
- - Quick-pick snippets panel
+ - Offline use
+ - Inline snippets completions
+ - Older versions limitations
 
 ### Get it on [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons)
