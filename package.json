@@ -1,10 +1,10 @@
 {
 	"name": "nearest-icons",
-	"displayName": "Nearest Icons from Font-Awesome",
-	"description": "Font Awesome (free) icons snippet completions and icons panel displaying for discovering search.",
-	"icon": "media/ni-logo-gray.png",
+	"displayName": "Nearest Icons (Font Awesome free icons)",
+	"description": "Font Awesome icons snippet completions and icons panel displaying for discovering search.",
+	"icon": "media/ni-logo.png",
 	"galleryBanner": {
-		"color": "#C80000",
+		"color": "#222",
 		"theme": "dark"
 	},
 	"publisher": "abax",
