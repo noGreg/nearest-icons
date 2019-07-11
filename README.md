@@ -29,5 +29,6 @@ Font Awesome icons snippet completions and icons panel displaying for discoverin
 
 ## Backlog
 
+ - 1.0.2 Richer README.md
  - 1.0.1 Richer README.md
  - 1.0.0 First release
