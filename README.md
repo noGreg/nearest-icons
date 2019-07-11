@@ -27,6 +27,10 @@ Font Awesome icons snippet completions and icons panel displaying for discoverin
 
 ### See it on [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons)
 
+## Licence
+
+See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
+
 ## Backlog
 
  - 1.0.2 Richer README.md

@@ -4,7 +4,7 @@
 	"description": "Font Awesome icons snippet completions and icons panel displaying for discovering search.",
 	"icon": "media/ni-logo.png",
 	"galleryBanner": {
-		"color": "#222",
+		"color": "#000",
 		"theme": "dark"
 	},
 	"publisher": "abax",
