@@ -1,5 +1,7 @@
 # Nearest Icons (Font-Awesome free icons)
 
+![alt text](https://img.shields.io/badge/font--awesome-5.x-blue.svg "font-awesome version badge") ![alt text](https://img.shields.io/badge/License-MIT-red.svg "License badge")
+
 Font Awesome 5 icons snippet completions and icons panel displaying for discovering search.
 
 ## Features
@@ -15,10 +17,18 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 
 ## Use 
 
+### Open icons panel:
+
  - Press `Ctrl + Shift + P` to call the command pallete 
  - Type *"Nearest icons"*, enough to get *"Nearest Icons - from Font-Awesome"* name in list
 
-![alt text](./media/demo.gif "Demo gif")
+![alt text](./media/panel-demo.gif "Panel demo gif")
+
+### Display `html` snippets:
+
+ - Just type `fa-` over an html file
+
+![alt text](./media/snippets-demo.gif "Snippets demo gif")
 
 ## Working on...
 
@@ -33,6 +43,7 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
 ## Backlog
 
+ - 1.1 Snippets on html files
  - 1.0.2 Richer README.md
  - 1.0.1 Richer README.md
  - 1.0.0 First release

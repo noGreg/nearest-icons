@@ -1384,7 +1384,6 @@ export function activate(context: vscode.ExtensionContext) {
 		let scriptPath = vscode.Uri.file(path.join(context.extensionPath, 'media', 'main.js'));
 		let jsSource = scriptPath.with({scheme: 'vscode-resource'});
 		
-		currentPanel.iconPath = vscode.Uri.parse('./media/ni-logo.png');
 		currentPanel.webview.html = getWebViewContent(jsSource);
 		
 		currentPanel.webview.onDidReceiveMessage(
