@@ -26,19 +26,19 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 
 ### Displaying snippets:
 
- - `i` tag on `.html` file
+ - `i` tag in `.html` file
 
 ![alt text](./media/snippets-html-demo.gif "Snippets demo gif html")
 
- - Unicode on pseudo element on `.css` file
+ - Unicode on pseudo element in `.css` file and auto-completion for the remaining mandatory css Font Awesome properties 
 
 ![alt text](./media/snippets-css-demo.gif "Snippets demo gif css")
 
- - Icon classes on `.js` file for frameworks and renderers
+ - Icon classes in `.js` file for frameworks and renderers
 
 ![alt text](./media/snippets-js-demo.gif "Snippets demo gif javascript")
 
-### See it on [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons), its obviously free!
+### Visit [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons) for download.
 
 ## Licence
 
