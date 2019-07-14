@@ -1,7 +1,6 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-const open = require('open');
 const faIcons = [
 	{ class: "ad", unicode: "f641", type: 'fas'},
 	{ class: "address-book", unicode: "f2b9", type: 'fas'},
@@ -1389,25 +1388,31 @@ export function activate(context: vscode.ExtensionContext) {
 		currentPanel.webview.onDidReceiveMessage(
 			async message => {
 				if (message.openIconPage) {
-					await open(message.openIconPage);	
+					vscode.env.openExternal(vscode.Uri.parse(message.openIconPage)).then((result) => {
+						if (result) {
+							console.log('Opening external success');
+						} else {
+							console.log('Opening external FAILED');
+						}
+					});
 				}
 			}
 		);
 	});
 
-	let classCompletion = vscode.languages.registerCompletionItemProvider(
-		{
-			scheme: 'file',
-			language: 'html'
-		}, 
+	let htmlCompletion = vscode.languages.registerCompletionItemProvider(
+		[
+			{
+				scheme: 'file',
+				language: 'html'
+			},
+			'plaintext'
+		], 
 		{
 			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) {
 				let completions = new vscode.CompletionList();
 
 				faIcons.forEach(element => {
-
-					// Copy the way of doing with "new" on completions samples project
-
 					let simple = new vscode.CompletionItem(`fa-${element.class}`);
 						simple.insertText = new vscode.SnippetString(`<i class="${element.type} fa-${element.class}"></i>`);
 						simple.detail = (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon';
@@ -1421,7 +1426,53 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
-	context.subscriptions.push(webview, classCompletion);
+	let jsCompletion = vscode.languages.registerCompletionItemProvider(
+		{
+			scheme: 'file',
+			language: 'javascript'
+		}, 
+		{
+			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) {
+				let completions = new vscode.CompletionList();
+
+				faIcons.forEach(element => {
+					let simple = new vscode.CompletionItem(`fa-${element.class}`);
+						simple.insertText = new vscode.SnippetString(`'${element.type} fa-${element.class}'`);
+						simple.detail = (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon';
+						simple.documentation = new vscode.MarkdownString(`**${element.class}**`);
+					
+					completions.items.push(simple);
+				});				
+
+				return completions;
+			}
+		}
+	);
+
+	let cssCompletion = vscode.languages.registerCompletionItemProvider(
+		{
+			scheme: 'file',
+			language: 'css'
+		}, 
+		{
+			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) {
+				let completions = new vscode.CompletionList();
+
+				faIcons.forEach(element => {
+					let simple = new vscode.CompletionItem(`fa-${element.class}`);
+						simple.insertText = new vscode.SnippetString(`content: '\\${element.unicode}';\nfont-weight: bold;\nfont-family: Font Awesome\\ 5 Free;`);
+						simple.detail = (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon';
+						simple.documentation = new vscode.MarkdownString(`**${element.class}**`);
+					
+					completions.items.push(simple);
+				});				
+
+				return completions;
+			}
+		}
+	);
+
+	context.subscriptions.push(webview, htmlCompletion, jsCompletion, cssCompletion);
 }
 
 export function deactivate() {}

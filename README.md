@@ -6,9 +6,9 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 
 ## Features
 
- - Icons tab panel, where you have the both free font-awesome **brand** and **solid** icons bunch. Where you can:
-   - Copy name, unicode and the tipic `i` snippet tag.
-   - Directly open the Font-Awesome icon webpage.
+ - Icons tab panel, where you have the both free font-awesome **brand** and **solid** icon bunchs. Where you can:
+  - Copy name, unicode and the tipic `i` snippet tag.
+  - Directly open the Font-Awesome icon webpage.
 
 ## Requirements
 
@@ -17,25 +17,28 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 
 ## Use 
 
-### Open icons panel:
+### Opening icons panel:
 
  - Press `Ctrl + Shift + P` to call the command pallete 
  - Type *"Nearest icons"*, enough to get *"Nearest Icons - from Font-Awesome"* name in list
 
 ![alt text](./media/panel-demo.gif "Panel demo gif")
 
-### Display `html` snippets:
+### Displaying snippets:
 
- - Just type `fa-` over an html file
+ - `i` tag on `.html` file
 
-![alt text](./media/snippets-demo.gif "Snippets demo gif")
+![alt text](./media/snippets-html-demo.gif "Snippets demo gif html")
 
-## Working on...
+ - Unicode on pseudo element on `.css` file
 
- - Offline use
- - Inline snippets completions
+![alt text](./media/snippets-css-demo.gif "Snippets demo gif css")
 
-### See it on [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons)
+ - Icon classes on `.js` file for frameworks and renderers
+
+![alt text](./media/snippets-js-demo.gif "Snippets demo gif javascript")
+
+### See it on [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons), its obviously free!
 
 ## Licence
 
@@ -43,6 +46,7 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
 ## Backlog
 
+ - 1.2 Snippets on .css and .js files
  - 1.1 Snippets on html files
  - 1.0.2 Richer README.md
  - 1.0.1 Richer README.md
