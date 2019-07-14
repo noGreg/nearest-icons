@@ -30,7 +30,7 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 
 ![alt text](./media/snippets-html-demo.gif "Snippets demo gif html")
 
- - Unicode on pseudo element in `.css` file and auto-completion for the remaining mandatory css Font Awesome properties 
+ - Unicode in pseudo element in `.css` file and auto-completion for the remaining mandatory css Font Awesome properties 
 
 ![alt text](./media/snippets-css-demo.gif "Snippets demo gif css")
 
@@ -46,8 +46,8 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
 ## Backlog
 
- - 1.2 Snippets on .css and .js files
- - 1.1 Snippets on html files
+ - 1.2 Snippets in .css and .js files
+ - 1.1 Snippets in .html files
  - 1.0.2 Richer README.md
  - 1.0.1 Richer README.md
  - 1.0.0 First release
