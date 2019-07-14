@@ -1,6 +1,6 @@
 # Nearest Icons (Font-Awesome free icons)
 
-Font Awesome icons snippet completions and icons panel displaying for discovering search.
+Font Awesome 5 icons snippet completions and icons panel displaying for discovering search.
 
 ## Features
 

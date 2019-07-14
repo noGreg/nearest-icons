@@ -23,14 +23,15 @@
 		"Snippets"
 	],
 	"activationEvents": [
-		"onCommand:extension.openNav"
+		"onCommand:extension.openNav",
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "extension.openNav",
-				"title": "Nearest Icons - From Font-Awesome"
+				"title": "Nearest Icons (Font Awesome free icons)"
 			}
 		],
 		"colors": [
