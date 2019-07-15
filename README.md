@@ -38,7 +38,7 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 
 ![alt text](./media/snippets-js-demo.gif "Snippets demo gif javascript")
 
-### Visit the [Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons) and give us a review :pray:.
+### Visit the [Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons) and give us a review :clap:.
 
 ## Licence
 
