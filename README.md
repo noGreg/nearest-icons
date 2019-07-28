@@ -1,6 +1,6 @@
 # Nearest Icons (Font-Awesome free icons)
 
-![alt text](https://img.shields.io/badge/font--awesome-5.x-blue.svg "font-awesome version badge") ![alt text](https://img.shields.io/badge/License-MIT-red.svg "License badge")
+![alt text](https://img.shields.io/badge/font--awesome-5.x-blue.svg "font-awesome version badge") [![alt text](https://img.shields.io/badge/License-MIT-red.svg "License badge")](https://github.com/FortAwesome/Font-Awesome)
 
 Font Awesome 5 icons snippet completions and icons panel displaying for discovering search.
 
@@ -40,9 +40,15 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 
 ### Visit the [Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons) and give us a review :clap:.
 
+[//]: <> Comment
+
 ## Licence
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
+
+## Notes
+
+ - Review or comment us, we will just grow! 😉
 
 ## Backlog
 

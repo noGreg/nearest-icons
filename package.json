@@ -19,7 +19,6 @@
 	"categories": [
 		"Extension Packs",
 		"Other",
-		"Linters",
 		"Snippets"
 	],
 	"activationEvents": [
@@ -32,17 +31,6 @@
 			{
 				"command": "extension.openNav",
 				"title": "Nearest Icons (Font Awesome free icons)"
-			}
-		],
-		"colors": [
-			{
-				"id": "secondarytext",
-				"description": "Secondary color for NI Icons",
-				"defaults": {
-					"dark": "#aaa",
-					"highContrast": "#aaa",
-					"light": "#aaa"
-				}
 			}
 		]
 	},

@@ -1447,7 +1447,7 @@ let brandBtn = render('div', optionsWrap);
     }
 
 let allBtn = render('div', optionsWrap);
-    allBtn.textContent = 'All'
+    allBtn.textContent = 'All';
     allBtn.css(optionsCss);
 
     allBtn.onclick = () => {
@@ -1469,7 +1469,6 @@ let clipBoard = render('input', main);
         opacity: 0
     });
 
-    
 
 function allIcons(cant) {
     iconsList.innerHTML = '';
@@ -1509,7 +1508,38 @@ function setIcon(icon) {
             border: '1px solid var(--vscode-editor-foreground)'
         });
 
-    let ic = render('icon', li, `${icon.type} fa-${icon.class}`);
+    let typeWrap = render('div', li);
+
+    typeWrap.css({
+        width: '100%',
+        display: 'inherit',
+        justifyContent: 'flex-end',
+        pointerEvents: 'none',
+        marginBottom: '5px'
+    });
+
+    let type = render('div', typeWrap);
+
+    type.textContent = icon.type;
+    type.css({ 
+        borderRadius: '5px',
+        display: 'inherit',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '0 5px',
+        border: '1px solid #aaa',
+        color: '#aaa'
+    });
+
+    let iconWrap = render('div', li);
+
+    iconWrap.css({
+        display: 'inherit',
+        alignItems: 'center',
+        justifyContent: 'center'
+    });
+
+    let ic = render('icon', iconWrap, `${icon.type} fa-${icon.class}`);
         ic.css ({
             fontSize: '30px',
             textAlign: 'center',
@@ -1598,7 +1628,7 @@ function setIcon(icon) {
 
     function setMouseOver(elem) {
         elem.css({
-            color: 'var(--vscode-secondarytext)',
+            color: '#aaa',
             cursor: 'pointer'
         });
     }
