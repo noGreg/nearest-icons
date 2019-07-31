@@ -40,8 +40,6 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 
 ### Visit the [Marketplace](https://marketplace.visualstudio.com/items?itemName=abax.nearest-icons) and give us a review :clap:.
 
-[//]: <> Comment
-
 ## Licence
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).

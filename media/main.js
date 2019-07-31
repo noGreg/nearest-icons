@@ -1520,7 +1520,7 @@ function setIcon(icon) {
 
     let type = render('div', typeWrap);
 
-    type.textContent = icon.type;
+    type.textContent = whichType(icon.type);
     type.css({ 
         borderRadius: '5px',
         display: 'inherit',
@@ -1644,6 +1644,15 @@ function setIcon(icon) {
         clipBoard.value = text;
         clipBoard.select();
         document.execCommand('copy');
+    }
+
+    function whichType(type) {
+        switch (type) {
+            case 'fab': return 'Brand'; 
+            case 'fal': return 'Light';
+            case 'far': return 'Regular';
+            default: return 'Solid';
+        }
     }
 }
 
