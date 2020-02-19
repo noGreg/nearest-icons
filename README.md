@@ -7,7 +7,7 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 ## Features
 
  - Icons tab panel, where you have the both free font-awesome **brand** and **solid** icon bunchs. Where you can:
-  - Copy name, unicode and the tipic `i` snippet tag.
+  - Copy name, unicode and the tipic `i` or `span` snippet tag.
   - Directly open the Font-Awesome icon webpage.
 
 ## Requirements
@@ -26,7 +26,7 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 
 ### Displaying snippets:
 
- - `i` tag in `.html` file
+ - `i` or `span` tag in [`.html | .php`] files
 
 ![alt text](./media/snippets-html-demo.gif "Snippets demo gif html")
 
