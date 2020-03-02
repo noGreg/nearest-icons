@@ -1443,9 +1443,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 				faIcons.forEach(element => {
 					let simple = new vscode.CompletionItem(`fa-${element.class}`);
-						simple.insertText = new vscode.SnippetString(`<font-awesome-icon icon="${element.class}" />`);
-						simple.detail = (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon';
-						simple.documentation = new vscode.MarkdownString(`**${element.class}** :fa-google:`);
+					
+					simple.insertText = new vscode.SnippetString(`<font-awesome-icon icon="${element.class}" />`);
+					simple.detail = (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon';
+					simple.documentation = new vscode.MarkdownString(`**${element.class}** :fa-google:`);
 					
 					completions.items.push(simple);
 				});				
