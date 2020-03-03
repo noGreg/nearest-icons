@@ -1366,10 +1366,6 @@ const faIcons = [
     {class: "youtube-square", unicode: "f431", type: "fab"},
     {class: "zhihu", unicode: "f63f", type: "fab"}
 ];
-// const md = require('markdown-it');
-// const fa = require('markdown-it-fontawesome');
-
-// md().use(fa);
 
 export function activate(context: vscode.ExtensionContext) {
 	let currentPanel: vscode.WebviewPanel | undefined = undefined;
@@ -1420,7 +1416,7 @@ export function activate(context: vscode.ExtensionContext) {
 					let simple = new vscode.CompletionItem(`fa-${element.class}`);
 						simple.insertText = new vscode.SnippetString(`<i class="${element.type} fa-${element.class}"></i>`);
 						simple.detail = (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon';
-						simple.documentation = new vscode.MarkdownString(`**${element.class}** :fa-google:`);
+						simple.documentation = new vscode.MarkdownString(`**${element.class}** :emoji:`);
 					
 					completions.items.push(simple);
 				});				

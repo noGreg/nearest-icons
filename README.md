@@ -1,6 +1,6 @@
 # Nearest Icons (Font-Awesome free icons)
 
-![alt text](https://img.shields.io/badge/font--awesome-5.x-blue.svg "font-awesome version badge") [![alt text](https://img.shields.io/badge/License-MIT-red.svg "License badge")](https://github.com/FortAwesome/Font-Awesome)
+[![alt text](https://img.shields.io/badge/font--awesome-5.x-blue.svg "font-awesome version badge")](https://github.com/FortAwesome/Font-Awesome) ![alt text](https://img.shields.io/badge/License-MIT-red.svg "License badge")
 
 Font Awesome 5 icons snippet completions and icons panel displaying for discovering search.
 
