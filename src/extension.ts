@@ -1406,6 +1406,10 @@ export function activate(context: vscode.ExtensionContext) {
 				scheme: 'file',
 				language: 'html'
 			},
+			{
+				scheme: 'file',
+				language: 'php'
+			},
 			'plaintext'
 		], 
 		{
@@ -1417,6 +1421,32 @@ export function activate(context: vscode.ExtensionContext) {
 						simple.insertText = new vscode.SnippetString(`<i class="${element.type} fa-${element.class}"></i>`);
 						simple.detail = (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon';
 						simple.documentation = new vscode.MarkdownString(`**${element.class}** :emoji:`);
+					
+					completions.items.push(simple);
+				});				
+
+				return completions;
+			}
+		}
+	);
+
+	let vueCompletion = vscode.languages.registerCompletionItemProvider(
+		[
+			{
+				scheme: 'file',
+				language: 'vue'
+			}
+		], 
+		{
+			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) {
+				let completions = new vscode.CompletionList();
+
+				faIcons.forEach(element => {
+					let simple = new vscode.CompletionItem(`fa-${element.class}`);
+					
+					simple.insertText = new vscode.SnippetString(`<font-awesome-icon icon="${element.class}" />`);
+					simple.detail = (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon';
+					simple.documentation = new vscode.MarkdownString(`**${element.class}** :fa-google:`);
 					
 					completions.items.push(simple);
 				});				
@@ -1472,7 +1502,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
-	context.subscriptions.push(webview, htmlCompletion, jsCompletion, cssCompletion);
+	context.subscriptions.push(webview, htmlCompletion, jsCompletion, cssCompletion, vueCompletion);
 }
 
 export function deactivate() {}
