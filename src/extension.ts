@@ -1536,3 +1536,7 @@ function getNonce() {
 	}
 	return text;
 }
+
+function importableIcon(code = ) {
+	// code
+}
