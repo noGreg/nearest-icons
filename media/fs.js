@@ -52,11 +52,11 @@ function fsManage(file,node,flag,content,newName) {
     
 }
 
-let q = url.parse(req.url, true).query;
-let file = q.fi;
-let option = q.op;
-let content = q.cont+'\n';
-let newName = q.rename;
+// let q = url.parse(req.url, true).query;
+// let file = q.fi;
+// let option = q.op;
+// let content = q.cont+'\n';
+// let newName = q.rename;
 
 fsManage(file,res,option,content,newName); 
 
