@@ -1,6 +1,5 @@
 (function() {
     const vscode = acquireVsCodeApi();
-    // console.log(JSON.parse(vscode));
     
 var fa = [{ class: "ad", unicode: "f641", type: 'fas'},
 { class: "address-book", unicode: "f2b9", type: 'fas'},

@@ -50,7 +50,7 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
 ## Backlog
 
- - 1.3 Snippets in .vue | .php files; update minimist to version 1.2.2
+ - 1.3 Snippets in .vue | .php files; update minimist to version 1.2.3
  - 1.2 Snippets in .css and .js files
  - 1.1 Snippets in .html files
  - 1.0.2 Richer README.md

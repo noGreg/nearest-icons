@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
+import * as fs from 'fs';
 
 const faIcons = [
 	{ class: "ad", unicode: "f641", type: 'fas'},
@@ -1400,6 +1401,8 @@ export function activate(context: vscode.ExtensionContext) {
 		);
 	});
 
+	// ======== [.html | .php | * ] COMPLETEION PROVIDER ========
+
 	let htmlCompletion = vscode.languages.registerCompletionItemProvider(
 		[
 			{
@@ -1430,31 +1433,45 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
+	// ======== .vue COMPLETEION PROVIDER ========
+
+	let importCommands : vscode.Disposable [] = [];
 	let vueCompletion = vscode.languages.registerCompletionItemProvider(
 		[
 			{
 				scheme: 'file',
+				language: 'Vue'
+			},
+			{
+				scheme: 'file',
 				language: 'vue'
 			}
-		], 
+		],
 		{
 			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) {
 				let completions = new vscode.CompletionList();
 
 				faIcons.forEach(element => {
-					let simple = new vscode.CompletionItem(`fa-${element.class}`);
+					let completionItem = new vscode.CompletionItem(`fa-${element.class}`);
+					let commandName = `ni-import-icon-${element.class}`;
+
+					Object.assign(completionItem, {
+						insertText: new vscode.SnippetString(`<font-awesome-icon icon="${element.class}" />`),
+						detail: (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon',
+						documentation: new vscode.MarkdownString(`**${element.class}** :fa-google:`),
+						command: { command: commandName }
+					});
 					
-					simple.insertText = new vscode.SnippetString(`<font-awesome-icon icon="${element.class}" />`);
-					simple.detail = (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon';
-					simple.documentation = new vscode.MarkdownString(`**${element.class}** :fa-google:`);
-					
-					completions.items.push(simple);
-				});				
+					importCommands.push(vscode.commands.registerCommand(commandName, () => importableIcon(element.class)));
+					completions.items.push(completionItem);
+				});			
 
 				return completions;
 			}
 		}
 	);
+
+	// ======== .js COMPLETEION PROVIDER ========
 
 	let jsCompletion = vscode.languages.registerCompletionItemProvider(
 		{
@@ -1479,6 +1496,8 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
+	// ======== .css COMPLETEION PROVIDER ========
+
 	let cssCompletion = vscode.languages.registerCompletionItemProvider(
 		{
 			scheme: 'file',
@@ -1502,12 +1521,16 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
-	context.subscriptions.push(webview, htmlCompletion, jsCompletion, cssCompletion, vueCompletion);
+	// The end...
+
+	context.subscriptions.push(webview, htmlCompletion, jsCompletion, cssCompletion, vueCompletion, ...importCommands);
 }
 
 export function deactivate() {}
 
 let nonce = getNonce();
+let importingFile : vscode.FileType;
+let addedIcons : string [] = [];
 
 function getWebViewContent(sourceJs: object) {
 	return `
@@ -1537,6 +1560,38 @@ function getNonce() {
 	return text;
 }
 
-function importableIcon(code = ) {
-	// code
+async function importableIcon(code : string) {
+	let parsedName = code.replace(/(\-\w)/g, function(m){return m[1].toUpperCase();});
+	let iconString = `
+		import { ${parsedName} } from '@fortawesome/free-solid-svg-icons'
+		library.add(${parsedName})
+	`;
+
+	if (!importingFile) {
+
+		console.log('executing quick open');
+
+		let fileInfo = await vscode.commands.executeCommand('workbench.action.quickOpen');
+			console.log(JSON.stringify(fileInfo));
+
+			let activeUrl = vscode.window.activeTextEditor;
+			if (activeUrl) {
+				return console.log('url: ', activeUrl.document.uri);
+			}
+		// });
+
+	} else if (addedIcons.indexOf(code) === -1) {
+
+		console.log('file is already set');
+
+		fs.appendFile(importingFile, iconString, function(err) {
+			if (err) { console.log('Error appending file'); }
+			console.log('append success');
+				
+			addedIcons.push(code);
+		});
+
+		addedIcons.push(code);
+	}
+	
 }
