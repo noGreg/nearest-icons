@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import { StringDecoder } from 'string_decoder';
 
 const faIcons = [
 	{ class: "ad", unicode: "f641", type: 'fas'},
@@ -1435,13 +1436,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// ======== .vue COMPLETEION PROVIDER ========
 
-	let importCommands : vscode.Disposable [] = [];
 	let vueCompletion = vscode.languages.registerCompletionItemProvider(
 		[
-			{
-				scheme: 'file',
-				language: 'Vue'
-			},
 			{
 				scheme: 'file',
 				language: 'vue'
@@ -1462,7 +1458,6 @@ export function activate(context: vscode.ExtensionContext) {
 						command: { command: commandName }
 					});
 					
-					importCommands.push(vscode.commands.registerCommand(commandName, () => importableIcon(element.class)));
 					completions.items.push(completionItem);
 				});			
 
@@ -1521,6 +1516,13 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
+	// ======== CREATE COMMANDS FOR EVERY ICON NAME ========
+
+	let importCommands : vscode.Disposable [] = faIcons.map(icon => {
+		let commandName = `ni-import-icon-${icon.class}`;
+		return vscode.commands.registerCommand(commandName, () => importableIcon(icon.class));
+	});
+
 	// The end...
 
 	context.subscriptions.push(webview, htmlCompletion, jsCompletion, cssCompletion, vueCompletion, ...importCommands);
@@ -1529,7 +1531,7 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() {}
 
 let nonce = getNonce();
-let importingFile : vscode.FileType;
+let importingFile : vscode.Uri;
 let addedIcons : string [] = [];
 
 function getWebViewContent(sourceJs: object) {
@@ -1562,36 +1564,125 @@ function getNonce() {
 
 async function importableIcon(code : string) {
 	let parsedName = code.replace(/(\-\w)/g, function(m){return m[1].toUpperCase();});
-	let iconString = `
-		import { ${parsedName} } from '@fortawesome/free-solid-svg-icons'
-		library.add(${parsedName})
-	`;
 
 	if (!importingFile) {
-
-		console.log('executing quick open');
-
-		let fileInfo = await vscode.commands.executeCommand('workbench.action.quickOpen');
-			console.log(JSON.stringify(fileInfo));
-
-			let activeUrl = vscode.window.activeTextEditor;
-			if (activeUrl) {
-				return console.log('url: ', activeUrl.document.uri);
-			}
-		// });
-
+		vscode.commands.executeCommand('workbench.action.quickOpen').then(() => {
+			setTimeout(() => {
+				let activeUrl = vscode.window.activeTextEditor;
+				if (activeUrl && addedIcons.indexOf(code) === -1) {
+					importingFile = activeUrl.document.uri;
+					appendContent();
+				}
+			}, 2000);
+		});
 	} else if (addedIcons.indexOf(code) === -1) {
 
 		console.log('file is already set');
 
-		fs.appendFile(importingFile, iconString, function(err) {
-			if (err) { console.log('Error appending file'); }
-			console.log('append success');
-				
-			addedIcons.push(code);
-		});
-
-		addedIcons.push(code);
+		appendContent();
 	}
+
+	function appendContent() {
+
+		let importLines = [
+			{
+				string: `import { library } from '@fortawesome/fontawesome-svg-core';`
+			},
+			{
+				string: `import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';`,
+			},
+			{
+				string: `import { ${parsedName} } from '@fortawesome/free-solid-svg-icons';`, 
+				listHere: true
+			},
+			{
+				string: `\nlibrary.add(${parsedName});`,
+				listHere: true
+			},
+			{
+				string: `Vue.component('font-awesome-icon', FontAwesomeIcon);`,
+			}
+		];	
+		
+		fs.readFile(importingFile.fsPath, function(err, data) {
+			if (err || importingFile.fsPath.indexOf('.js') === -1) {
+				importingFile = vscode.Uri.file('');
+
+				console.log({importingFile});
+
+				vscode.window.showInformationMessage('Error with selected file', 'Retry').then(command => {
+					if (command === 'Retry') {
+						importableIcon(code);
+					}
+				});
+				
+				return console.log({err});
+			}
+
+			const decoder = new StringDecoder('utf8');
+			const lecture = decoder.write(data);
+
+			if (addedIcons.length) {
+				let lastIcon = addedIcons[addedIcons.length - 1];
+				let firstLine = lecture.indexOf(lastIcon);
+				let lastLine = lecture.lastIndexOf(lastIcon);
+
+				addedIcons.push(parsedName);
+
+				function writeDoc(startPoint : number) {
+					return new Promise((resolve, reject) => {
+						let firstPart = lecture.substring(0, startPoint);
+						let linePart = lecture.substring(startPoint, lecture.length);
+						let	lineImportMap = linePart.match(lastIcon);
+
+						if (!firstPart.length) {
+							return vscode.window.showInformationMessage('Nearest Icons: Error reading file. Try again');
+						}
 	
+						/* Set Iterable section */
+	
+						let	lineRestMap = linePart.match(new RegExp(`${addedIcons[0]}.+`, 'i')); 
+						let iconImports = addedIcons.join(', ');
+						let lastImports = addedIcons.splice(0, addedIcons.length - 1).join(', ');
+						let resultLine = lineRestMap ? lineRestMap[0].replace(new RegExp(lastImports, 'gi'), iconImports) : ''; 
+						let restDocument = lecture.substring(startPoint + resultLine.length, lecture.length);
+	
+						/* ------ */
+	
+						let file = fs.openSync(importingFile.fsPath,'r+');
+						let bufferedText = Buffer.from(`${firstPart}${resultLine}${restDocument}`, 'utf8');
+
+						
+						let writtenBytes = fs.writeSync(file, bufferedText, 0, bufferedText.length, 0);
+						
+						console.log({startPoint, lecture, lineImportMap, resultLine, writtenBytes});
+						
+						setTimeout(() => fs.close(file, () => writtenBytes ? resolve({done: true}) : reject({done: false})), 1000);
+					});
+				}
+
+				let actions = [firstLine, lastLine].map(async startPoint => writeDoc(startPoint));
+
+				Promise.all(actions).then(res => {
+					console.log({res});
+				});
+			} else {
+				let lastImportIndex = lecture.lastIndexOf('import ');
+				let secondPart = lecture.substring(lastImportIndex, lecture.length);
+				let	lastLineMap = secondPart.match(/^import.+/gi);
+				let lastLineLength = lastLineMap ? lastLineMap[0].length : 0;
+				let position = lastImportIndex + lastLineLength;
+				let firstPartString = lecture.substr(0, position);
+
+				secondPart = lecture.substring(position, lecture.length);
+
+				let lines = importLines.map(l => l.string).join('\n');
+				let file = fs.openSync(importingFile.fsPath,'r+');
+				let bufferedText = Buffer.from(`${firstPartString}\n${lines}${secondPart}`, 'utf8');
+				
+				fs.writeSync(file, bufferedText, 0, bufferedText.length, 0);
+				fs.close(file, () => addedIcons.push(parsedName));
+			}
+		});
+	}
 }
