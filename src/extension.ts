@@ -1413,6 +1413,22 @@ export function activate(context: vscode.ExtensionContext) {
 				scheme: 'file',
 				language: 'php'
 			},
+			{
+				scheme: 'file',
+				language: 'twig'
+			},
+			{
+				scheme: 'file',
+				language: 'tsx'
+			},
+			{
+				scheme: 'file',
+				language: 'jsx'
+			},
+			{
+				scheme: 'file',
+				language: 'vue'
+			},
 			'plaintext'
 		], 
 		{
@@ -1427,44 +1443,6 @@ export function activate(context: vscode.ExtensionContext) {
 					
 					completions.items.push(simple);
 				});				
-
-				return completions;
-			}
-		}
-	);
-
-	// ======== .vue COMPLETEION PROVIDER ========
-
-	let importCommands : vscode.Disposable [] = [];
-	let vueCompletion = vscode.languages.registerCompletionItemProvider(
-		[
-			{
-				scheme: 'file',
-				language: 'Vue'
-			},
-			{
-				scheme: 'file',
-				language: 'vue'
-			}
-		],
-		{
-			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) {
-				let completions = new vscode.CompletionList();
-
-				faIcons.forEach(element => {
-					let completionItem = new vscode.CompletionItem(`fa-${element.class}`);
-					let commandName = `ni-import-icon-${element.class}`;
-
-					Object.assign(completionItem, {
-						insertText: new vscode.SnippetString(`<font-awesome-icon icon="${element.class}" />`),
-						detail: (element.type === 'fas' ? 'Solid' : 'Brand') + ' icon',
-						documentation: new vscode.MarkdownString(`**${element.class}** :fa-google:`),
-						command: { command: commandName }
-					});
-					
-					importCommands.push(vscode.commands.registerCommand(commandName, () => importableIcon(element.class)));
-					completions.items.push(completionItem);
-				});			
 
 				return completions;
 			}
@@ -1523,14 +1501,12 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// The end...
 
-	context.subscriptions.push(webview, htmlCompletion, jsCompletion, cssCompletion, vueCompletion, ...importCommands);
+	context.subscriptions.push(webview, htmlCompletion, jsCompletion, cssCompletion);
 }
 
 export function deactivate() {}
 
 let nonce = getNonce();
-let importingFile : vscode.FileType;
-let addedIcons : string [] = [];
 
 function getWebViewContent(sourceJs: object) {
 	return `
@@ -1558,40 +1534,4 @@ function getNonce() {
 		text += possible.charAt(Math.floor(Math.random() * possible.length));
 	}
 	return text;
-}
-
-async function importableIcon(code : string) {
-	let parsedName = code.replace(/(\-\w)/g, function(m){return m[1].toUpperCase();});
-	let iconString = `
-		import { ${parsedName} } from '@fortawesome/free-solid-svg-icons'
-		library.add(${parsedName})
-	`;
-
-	if (!importingFile) {
-
-		console.log('executing quick open');
-
-		let fileInfo = await vscode.commands.executeCommand('workbench.action.quickOpen');
-			console.log(JSON.stringify(fileInfo));
-
-			let activeUrl = vscode.window.activeTextEditor;
-			if (activeUrl) {
-				return console.log('url: ', activeUrl.document.uri);
-			}
-		// });
-
-	} else if (addedIcons.indexOf(code) === -1) {
-
-		console.log('file is already set');
-
-		fs.appendFile(importingFile, iconString, function(err) {
-			if (err) { console.log('Error appending file'); }
-			console.log('append success');
-				
-			addedIcons.push(code);
-		});
-
-		addedIcons.push(code);
-	}
-	
 }

@@ -26,7 +26,7 @@ Font Awesome 5 icons snippet completions and icons panel displaying for discover
 
 ### Displaying snippets:
 
- - `i` or `span` tag in [`.html | .php`] files
+ - `i` or `span` tag in [`.html | .php | .twig | .tsx | .jsx | .vue`] files
 
 ![alt text](./media/snippets-html-demo.gif "Snippets demo gif html")
 
@@ -50,7 +50,7 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
 ## Backlog
 
- - 1.3 Snippets in .vue | .php files; update minimist to version 1.2.3
+ - 1.3 Basic support for Vue, React & PHP files; update minimist to version 1.2.3
  - 1.2 Snippets in .css and .js files
  - 1.1 Snippets in .html files
  - 1.0.2 Richer README.md
